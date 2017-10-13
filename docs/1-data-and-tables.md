@@ -43,4 +43,71 @@ What's the sum?      | SUM
 
 ### How queries happen
 
-![](/images/how-queries-happen.png)
+When our code fetches data out of a database, it does so by sending a query (SQL). In response, the database will send us a result containing a new table with the data we asked for.
+
+Depending on the environment, our code could be talking to a database over the network or it might be calling a library that keeps a database local. ![](/images/how-queries-happen.png)
+
+```
+// Examples of SQL
+
+=# select 2+2;
+ ?column?
+----------
+        4
+(1 row)
+
+=# select 2+2 as sum;
+ sum
+-----
+   4
+(1 row)
+```
+
+## Related Tables
+
+A database will usually have several tables in it. A value with the same meaning can occur in different tables and have different column names. We can derive new tables by linking up existing tables using joins.
+
+## Uniqueness and Keys
+
+Whenever we want to unambiguously relate a row of one table to a row of another, we have to have a unique value. It's common that most database systems do that for you.
+
+A column that uniquely identifies the rows in a table can be called a **primary key**.
+
+## Joining Tables
+
+Joining those tables gives us a new table, which contains information taken from the two original tables. The join statement has a join condition that tells the database how to match up the rows from one table with the rows from the other.
+
+animals:
+
+name (string) | species (string) | birthdate (date)
+------------- | ---------------- | ----------------
+Max           | gorilla          | 2001-04-13
+Sue           | gorilla          | 1998-06-12
+Max           | moose            | 2012-02-20
+Alison        | llama            | 1997-11-24
+George        | gorilla          | 2011-01-09
+Spot          | iguana           | 2010-07-23
+Ratu          | orangutan        | 1989-09-15
+Eli           | llama            | 2002-02-22
+
+diet:
+
+species (string) | food (string)
+---------------- | -------------
+llama            | plants
+brown bear       | fish
+brown bear       | meat
+brown bear       | plants
+orangutan        | plants
+orangutan        | insects
+
+This SQL query will join the two tables to find out what foods each animal can eat:
+
+```
+SELECT animals.name,
+       animals.species,
+       diet.food
+  FROM animals
+  JOIN diet ON animals.species = diet.species
+  WHERE diet.food = 'fish';
+```
