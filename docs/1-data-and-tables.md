@@ -47,7 +47,7 @@ When our code fetches data out of a database, it does so by sending a query (SQL
 
 Depending on the environment, our code could be talking to a database over the network or it might be calling a library that keeps a database local. ![](/images/how-queries-happen.png)
 
-```
+```sql
 // Examples of SQL
 
 =# select 2+2;
@@ -103,7 +103,7 @@ orangutan        | insects
 
 This SQL query will join the two tables to find out what foods each animal can eat:
 
-```
+```sql
 SELECT animals.name,
        animals.species,
        diet.food

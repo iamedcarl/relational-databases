@@ -38,7 +38,7 @@ This table gives the common names for each of the taxonomic orders in the taxono
 
 And here are the SQL commands that were used to create those tables. We won't cover the create table command until lesson 4, but it may be interesting to look at:
 
-```
+```sql
 create table animals (  
        name text,
        species text,

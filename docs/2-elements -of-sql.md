@@ -55,7 +55,7 @@ The **group by** clause is only used with aggregations, such as **max** or **sum
 
 #### Query Example:
 
-```
+```python
 # Write a query that returns all the species in the zoo, and how many animals of
 # each species there are, sorted with the most populous species at the top.
 #
@@ -111,7 +111,7 @@ A single insert statement can only insert into a single table. (Contrast this wi
 
 ### More Join Practice
 
-```
+```python
 #
 # List all the taxonomic orders, using their common names, sorted by the number of
 # animals of that order that the zoo has.
@@ -148,15 +148,18 @@ SELECT ordernames.name, count(*) as num
 
 The **having** clause works like the **where** clause, but it applies after **group by** aggregations take place. The syntax is like this:
 
-```
-select columns from tables group by column having condition;
+```sql
+select columns
+  from tables
+  group by column
+  having condition;
 ```
 
 It doesn't usually make sense to use **having** without **group by**.
 
 A few more examples:
 
-```
+```sql
 # explicit join style
 SELECT food, count(animals.name) as num
   FROM diet
@@ -167,7 +170,7 @@ SELECT food, count(animals.name) as num
 
 And here is another:
 
-```
+```sql
 # simple join style
 SELECT food, count(animals.name) as num
   FROM diet, animals
